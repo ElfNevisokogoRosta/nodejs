@@ -17,11 +17,16 @@ const getContactById = async (contactId) => {
 
 const removeContact = async (contactId) => {
   const allContacts = await listContacts();
-  const filteredContacts = allContacts.filter(
-    (contact) => contact.id !== contactId
-  );
-  await fs.writeFile(contactsPath, JSON.stringify(filteredContacts, null, 2));
-  return filteredContacts;
+  const isInArr = allContacts.indexOf(({ id }) => id === contactId);
+  console.log(isInArr);
+  if (isInArr !== -1) {
+    const filteredContacts = allContacts.filter(
+      (contact) => contact.id !== contactId
+    );
+    await fs.writeFile(contactsPath, JSON.stringify(filteredContacts, null, 2));
+    return filteredContacts;
+  }
+  return null;
 };
 
 const addContact = async ({ name, email, phone }) => {

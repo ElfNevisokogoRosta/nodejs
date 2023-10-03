@@ -21,8 +21,8 @@ const invokeActions = async ({ action, id, name, email, phone }) => {
       break;
 
     case "add":
-      if (name === "" || email === "" || phone === "") {
-        console.log("not all data correct");
+      if (name || email || phone) {
+        console.log("Not all data is correct. Please fill in all fields.");
         break;
       }
       const newContact = { name, email, phone };
@@ -32,11 +32,11 @@ const invokeActions = async ({ action, id, name, email, phone }) => {
 
     case "remove":
       const removedContact = await removeContact(id);
-      if (removedContact) {
-        console.log("Contact removed successfully!");
-      } else {
-        console.log("Contact not found!");
+      if (removedContact === null) {
+        console.log("contact with that id not found");
+        break;
       }
+      console.log("contact removed");
       break;
 
     default:
