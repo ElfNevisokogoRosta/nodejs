@@ -20,10 +20,6 @@ const invokeActions = async ({ action, id, name, email, phone }) => {
       break;
 
     case "add":
-      if (name || email || phone) {
-        console.log("Not all data is correct. Please fill in all fields.");
-        break;
-      }
       const newContact = { name, email, phone };
       await addContact(newContact);
       console.log("Contact added successfully!");
